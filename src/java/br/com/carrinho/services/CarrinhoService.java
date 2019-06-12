@@ -19,6 +19,10 @@ public class CarrinhoService {
     public boolean inserir (Carrinho carrinho){
         return carrinhoDao.inserir(carrinho);
     }
+    
+    public boolean inserirProdCar (Carrinho carrinho){
+        return carrinhoDao.inserirProdCar(carrinho);
+    }
 
     public Boolean alterar (Carrinho carrinho){
         return carrinhoDao.alterar(carrinho);

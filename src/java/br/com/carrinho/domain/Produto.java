@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Produto implements Serializable{
     
+    private Boolean sel;
     private Integer id;
     private String descricao;
     private Double qtde;
@@ -24,6 +25,14 @@ public class Produto implements Serializable{
         this.valor = valor;
     }
 
+    public Boolean getSel() {
+        return sel;
+    }
+
+    public void setSel(Boolean sel) {
+        this.sel = sel;
+    }
+    
     public Double getValor() {
         return valor;
     }
