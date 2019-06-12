@@ -4,30 +4,30 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition template="../templates/template.xhtml">
-        <ui:define name="titleWindow">ScarGames - Bandeiras</ui:define>
+        <ui:define name="titleWindow">ScarGames - Produtos</ui:define>
         <ui:define name="content">
             <div class="ui-g">
                 <div class="ui-g-1"></div>
                 <div class="ui-g-10">
-                    <h1>Cadastro de Bandeiras</h1>
+                    <h1>Cadastro de Produtos</h1>
                 </div>
                 <div class="ui-g-1"></div>
                 
                 <div class="ui-g-1"></div>
                 <div class="ui-g-10">
                     <p:inputText id="descricao" placeholder="Descrição"
-                                 value="#{bandeiraMB.bandeira.descricao}"
+                                 value="#{produtoMB.produto.descricao}"
                                  style="width: 95%;"/>
                 </div>
                 <div class="ui-g-1"></div>
             </div>
             <div align="center" style="margin-top: 20px;">
                 <p:commandButton value="Salvar" icon="ui-icon-check"  
-                                 action="#{bandeiraMB.inserir()}"
+                                 action="#{produtoMB.inserir()}"
                                  style="width: 150px; margin-right: 20px;"
                                  update="growl"/>
                 <p:commandButton value="Cancelar" icon="ui-icon-close" 
-                                 action="#{bandeiraMB.cancelar()}" 
+                                 action="#{produtoMB.cancelar()}" 
                                  immediate="true" style="width: 150px;"/>
             </div>
         </ui:define>
