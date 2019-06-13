@@ -1,71 +1,71 @@
 package br.com.carrinho.controller;
 
-import br.com.carrinho.domain.Produto;
-import br.com.carrinho.services.ProdutoService;
+import br.com.carrinho.domain.Carrinho;
+import br.com.carrinho.services.CarrinhoService;
 import br.com.carrinho.util.UtilMessages;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean(name = "produtoMB")
+@ManagedBean(name = "carrinhoMB")
 @SessionScoped
 public class CarrinhoMB implements Serializable{
 
-    private Produto produto;
-    private List<Produto> produtos;
+    private Carrinho carrinho;
+    private List<Carrinho> carrinhos;
     
     public CarrinhoMB() {
         this.listar();
     }
     
     public void listar(){
-        ProdutoService service = new ProdutoService();
-        produtos = service.listar();
+        CarrinhoService service = new CarrinhoService();
+        carrinhos = service.listar();
     }
     
     public String novo(){
-        produto = new Produto();
+        carrinho = new Carrinho();
         return "new.xhtml?faces-redirect=true";
     }
     
     public String inserir(){
-        ProdutoService service = new ProdutoService();
-        if (service.inserir(produto)){
-            UtilMessages.messageInfo("Produto cadastrada com sucesso!");
+        CarrinhoService service = new CarrinhoService();
+        if (service.inserir(carrinho)){
+            UtilMessages.messageInfo("Carrinho cadastrada com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao cadastrar a produto!");
+            UtilMessages.messageError("Ocorreu um erro ao cadastrar a carrinho!");
             return null;
         }
     }
     
     public String alterar(){
-        ProdutoService service = new ProdutoService();
-        if (service.alterar(produto)){
-            UtilMessages.messageInfo("Produto alterada com sucesso!");
+        CarrinhoService service = new CarrinhoService();
+        if (service.alterar(carrinho)){
+            UtilMessages.messageInfo("Carrinho alterada com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao alterar a produto!");
+            UtilMessages.messageError("Ocorreu um erro ao alterar a carrinho!");
             return null;
         }
     }
     
-    public String carregarDados(Produto produto){
-        this.produto = produto;
+    public String carregarDados(Carrinho carrinho){
+        this.carrinho = carrinho;
         return "alter.xhtml?faces-redirect=true";
     }
     
-    public String excluir(Produto produto){
-        ProdutoService service = new ProdutoService();
-        if (service.excluir(produto)){
-            UtilMessages.messageInfo("Produto excluída com sucesso!");
+    public String excluir(Carrinho carrinho){
+        CarrinhoService service = new CarrinhoService();
+        if (service.excluir(carrinho)){
+            UtilMessages.messageInfo("Carrinho excluída com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao excluir a produto!");
+            UtilMessages.messageError("Ocorreu um erro ao excluir a carrinho!");
             return null;
         }
     }
@@ -74,19 +74,19 @@ public class CarrinhoMB implements Serializable{
         return "list.xhtml?faces-redirect=true";
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public List<Carrinho> getCarrinhos() {
+        return carrinhos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setCarrinhos(List<Carrinho> carrinhos) {
+        this.carrinhos = carrinhos;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public Carrinho getCarrinho() {
+        return carrinho;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setCarrinho(Carrinho carrinho) {
+        this.carrinho = carrinho;
     }
 }

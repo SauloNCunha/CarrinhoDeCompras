@@ -34,8 +34,29 @@ public class CarrinhoDao {
        return true;
     }
     
-    public void inserirProdCar(List<Produto> produtossel){
+    public void inserirProdCar(List<Carrinho> produtossel){
         
     }
     
+    public Boolean excluir(Carrinho carrinho){
+        Boolean resul = false; 
+        for(int i = 0; i < listaCar.size(); i++){
+          if(listaCar.get(i) == carrinho){
+             listaCar.remove(i);
+             resul = true;
+          } 
+      }
+        return resul;
+    }
+    
+    public Boolean alterar(Carrinho carrinho){
+        Boolean resul = false; 
+        for(int i = 0; i < listaCar.size(); i++){
+          if(listaCar.get(i) == carrinho){
+             listaCar.add(i,carrinho);
+             resul = true;
+          } 
+      }
+        return resul;
+    }
 }

@@ -30,12 +30,15 @@
                                  rows="10" emptyMessage="Nenhum registro encontrado">
                         <f:facet name="header">Listagem de Produtos</f:facet>
                         <f:facet name="footer">Total de Registros: #{produtoMB.produtos.size()}</f:facet>
+                        
                         <p:column headerText="Seleção" sortBy="#{produto.sel}">
-                            <p:selectBooleanCheckbox id="#{sel}" value="#{value}" />
+                            <p:selectBooleanCheckbox value="#{value}" />
                         </p:column>
+                        
                         <p:column headerText="Descrição" sortBy="#{produto.descricao}">
                             <h:outputText value="#{produto.descricao}"/>
                         </p:column>
+                        
                         <p:column headerText="Quantidade" sortBy="#{produto.qtde}">
                             <h:outputText value="#{produto.qtde}"/>
                         </p:column>
@@ -49,6 +52,11 @@
                             <p:commandButton icon="ui-icon-trash" action="#{produtoMB.excluir(produto)}"
                                              onclick="if (!confirm('Tem certeza que deseja excluir?')) return false"/>
                         </p:column>
+                        <!-- Falta implementar o redirect para a pagina do List do Carrinho 
+                        <p:column headerText="Carrinho" width="70" style="text-align: center;">
+                            <p:commandButton icon="ui-icon-trash" 
+                                             onclick="sendRedirect('private/carrinho/list.xhtml')"/>
+                        </p:column> -->
                     </p:dataTable>
                 </div>
                 <div class="ui-g-1"></div>

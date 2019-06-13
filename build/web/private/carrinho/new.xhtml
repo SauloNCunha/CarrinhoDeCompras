@@ -16,18 +16,31 @@
                 <div class="ui-g-1"></div>
                 <div class="ui-g-10">
                     <p:inputText id="descricao" placeholder="Descrição"
-                                 value="#{bandeiraMB.bandeira.descricao}"
+                                 value="#{carrinhoMB.carrinho.descricao}"
+                                 style="width: 95%;"/>
+                </div>
+                <div class="ui-g-1"></div>
+                <div class="ui-g-1"></div>
+                <div class="ui-g-5">
+                    <p:inputText id="qtde" placeholder="Quantidade"
+                                 value="#{carrinhoMB.carrinho.qtde}"
+                                 style="width: 95%;"/>
+                </div>
+               
+                <div class="ui-g-5">
+                    <p:inputText id="valor" placeholder="Valor"
+                                 value="#{carrinhoMB.carrinho.valor}"
                                  style="width: 95%;"/>
                 </div>
                 <div class="ui-g-1"></div>
             </div>
             <div align="center" style="margin-top: 20px;">
                 <p:commandButton value="Salvar" icon="ui-icon-check"  
-                                 action="#{bandeiraMB.inserir()}"
+                                 action="#{carrinhoMB.inserir()}"
                                  style="width: 150px; margin-right: 20px;"
                                  update="growl"/>
                 <p:commandButton value="Cancelar" icon="ui-icon-close" 
-                                 action="#{bandeiraMB.cancelar()}" 
+                                 action="#{carrinhoMB.cancelar()}" 
                                  immediate="true" style="width: 150px;"/>
             </div>
         </ui:define>
