@@ -1,9 +1,9 @@
 package br.com.carrinho.controller;
 
-import br.com.carrinho.domain.Carrinho;
-import br.com.carrinho.services.CarrinhoService;
+import br.com.carrinho.domain.Produto;
 import br.com.carrinho.util.UtilMessages;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -12,81 +12,100 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class CarrinhoMB implements Serializable{
 
-    private Carrinho carrinho;
-    private List<Carrinho> carrinhos;
-    
-    public CarrinhoMB() {
-        this.listar();
-    }
-    
-    public void listar(){
-        CarrinhoService service = new CarrinhoService();
-        carrinhos = service.listar();
-    }
-    
-    public String novo(){
-        carrinho = new Carrinho();
-        return "new.xhtml?faces-redirect=true";
-    }
-    
-    public String inserir(){
-        CarrinhoService service = new CarrinhoService();
-        if (service.inserir(carrinho)){
-            UtilMessages.messageInfo("Carrinho cadastrada com sucesso!");
-            this.listar();
-            return "list.xhtml?faces-redirect=true";
-        }else{
-            UtilMessages.messageError("Ocorreu um erro ao cadastrar a carrinho!");
-            return null;
-        }
-    }
-    
-    public String alterar(){
-        CarrinhoService service = new CarrinhoService();
-        if (service.alterar(carrinho)){
-            UtilMessages.messageInfo("Carrinho alterada com sucesso!");
-            this.listar();
-            return "list.xhtml?faces-redirect=true";
-        }else{
-            UtilMessages.messageError("Ocorreu um erro ao alterar a carrinho!");
-            return null;
-        }
-    }
-    
-    public String carregarDados(Carrinho carrinho){
+    private List<Produto> carrinho;
+    private float total;
+
+    public CarrinhoMB(List<Produto> carrinho, float total) {
         this.carrinho = carrinho;
-        return "alter.xhtml?faces-redirect=true";
+        this.total = total;
+    }
+
+    public CarrinhoMB() {
+        this.carrinho = new ArrayList<>();
+        this.listar();
+        
     }
     
-    public String excluir(Carrinho carrinho){
-        CarrinhoService service = new CarrinhoService();
-        if (service.excluir(carrinho)){
-            UtilMessages.messageInfo("Carrinho excluída com sucesso!");
+    public ArrayList<Produto> listar(){
+        return (ArrayList<Produto>) carrinho;
+    }
+       
+    public String inserir(Produto produto){
+        
+        boolean controle = false;
+        
+        
+        for (Produto c: carrinho){
+            if (produto.equals(c)){
+                c.setQtde(c.getQtde()+1);
+                this.listar();
+                controle = true;
+                for(Produto p : carrinho){
+                    setTotal((float) (getTotal() + p.getPreco()));
+                }
+                return "list.xhtml?faces-redirect=true";
+            }
+        }
+
+        if (!controle){
+            produto.setQtde(1);
+            carrinho.add(produto);
+            for(Produto p : carrinho){
+                setTotal((float) (getTotal() + p.getPreco()));
+            }
+            UtilMessages.messageInfo("Produto inserido com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao excluir a carrinho!");
-            return null;
+            UtilMessages.messageError("Ocorreu um erro ao inserir o produto!");
+            return "list.xhtml?faces-redirect=true";
         }
     }
     
-    public String cancelar(){
+    public String excluir(Produto produto){        
+        if (carrinho.remove(produto)){
+            UtilMessages.messageInfo("Produto excluído com sucesso!");
+            this.listar();
+            return "list.xhtml?faces-redirect=true";
+        }else{
+            UtilMessages.messageError("Ocorreu um erro ao excluir o produto!");
+            return null;
+        }
+    }
+        
+    public String esvaziarCarrinho(){
+        carrinho.clear();
+        UtilMessages.messageInfo("Compra Finalizada! Obrigado e Volte Sempre.");
         return "list.xhtml?faces-redirect=true";
     }
 
-    public List<Carrinho> getCarrinhos() {
-        return carrinhos;
+    public String cancelar(){
+        return "list.xhtml?faces-redirect=true";
+    }
+    
+    public String home(){
+        return "index";
     }
 
-    public void setCarrinhos(List<Carrinho> carrinhos) {
-        this.carrinhos = carrinhos;
-    }
-
-    public Carrinho getCarrinho() {
+    public List<Produto> getCarrinho() {
         return carrinho;
     }
 
-    public void setCarrinho(Carrinho carrinho) {
+    public void setCarrinho(List<Produto> carrinho) {
         this.carrinho = carrinho;
     }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+    
+    public String finalizar(){
+        return "finalizarcompra.xhtml?faces-redirect=true";
+    }
+
+    
 }

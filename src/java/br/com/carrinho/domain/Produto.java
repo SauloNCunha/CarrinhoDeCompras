@@ -1,62 +1,19 @@
 package br.com.carrinho.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
-
-public class Produto implements Serializable{
+public class Produto implements Serializable {
     
-    private Boolean sel;
     private Integer id;
     private String descricao;
-    private Double qtde;
-    private Double valor;
-   
-    private List<Produto> produtos;   
-    
+    private double preco;
+    private Integer qtde;
+    private Integer quantidade;
 
     public Produto() {
     }
-
-    public Produto(Integer id, String descricao, Double valor) {
-        this.id = id;
-        this.descricao = descricao;
-        this.valor = valor;
-    }
-
-    public Boolean getSel() {
-        return sel;
-    }
-
-    public void setSel(Boolean sel) {
-        this.sel = sel;
-    }
     
-    public Double getValor() {
-        return valor;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public Double getQtde() {
-        return qtde;
-    }
-
-    public void setQtde(Double qtde) {
-        this.qtde = qtde;
-    }
-    
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -72,7 +29,31 @@ public class Produto implements Serializable{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
- 
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public Integer getQtde() {
+        return qtde;
+    }
+
+    public void setQtde(Integer qtde) {
+        this.qtde = qtde;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
     
     @Override
     public int hashCode() {
@@ -98,7 +79,5 @@ public class Produto implements Serializable{
         }
         return true;
     }
-    
-    
-    
+
 }

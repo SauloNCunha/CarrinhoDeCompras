@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="titleWindow">Carrinho de Compras - Produtos</ui:define>
+        <ui:define name="content">
+            <div align="center">
+                <div class="ui-g">
+                    <div class="ui-g-1"></div>
+                    <div class="ui-g-10">
+                        <h1>Finalizar Compra</h1>
+                    </div>
+                    <div class="ui-g-1"></div> 
+                    
+                    <div class="ui-g-1"></div> 
+                    <div align="right" class="ui-g-5">
+                        <h:outputText value="Total de Produtos no Carrinho: #{carrinhoMB.carrinho.size()}" />
+                    </div>
+                   
+                    <div align="left" class="ui-g-5">
+                        <h:outputText value="Quantidade de Produtos: #{carrinhoMB.carrinho.size()}"/>
+                    </div>
+                    <div class="ui-g-1"></div> 
+                    
+                    <div class="ui-g-1"></div>
+                    <div align="right" class="ui-g-5">
+                        <h:outputLabel value="Valor Total: R$#{carrinhoMB.total}0"/>
+                    </div>                
+                    
+                    <div align="left" class="ui-g-5">
+                        <p:selectOneMenu id="formaPagamento" value="formaPagamento" style="width:125px"
+                             placeholder="Pagamento">
+                            <f:selectItem itemLabel="Dinheiro" itemValue="Dinheiro" />
+                            <f:selectItem itemLabel="Cartão de Crédito" itemValue="Cartão de Crédito" />
+                            <f:selectItem itemLabel="Cartão de Débito" itemValue="Cartão de Débito" />
+                            <f:selectItem itemLabel="Cheque" itemValue="Cheque"/>
+                            <f:selectItem itemLabel="Bitcoin" itemValue="Bitcoin" />
+                        </p:selectOneMenu>
+                    </div>            
+                    <div class="ui-g-1"></div>
+                    <div class="ui-g-1"></div>
+                    <div class="ui-g-10">
+                       <div align="center" style="margin-top: 20px;">
+                            <p:commandButton value="Finalizar" icon="ui-icon-check"  
+                                         action="#{carrinhoMB.esvaziarCarrinho()}"
+                                         style="width: 150px; margin-right: 20px;"/>
+                            <p:commandButton value="Cancelar" icon="ui-icon-close" 
+                                         onclick="PF('gestaoGenero').hide()" 
+                                         immediate="true" style="width: 150px;"/>
+                        </div>  
+                    </div> 
+                </div>
+            </div>
+            
+        </ui:define>
+    </ui:composition>
+</html>

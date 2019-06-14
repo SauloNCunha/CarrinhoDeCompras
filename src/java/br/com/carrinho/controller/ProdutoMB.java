@@ -1,9 +1,9 @@
 package br.com.carrinho.controller;
 
 import br.com.carrinho.domain.Produto;
-import br.com.carrinho.services.ProdutoService;
 import br.com.carrinho.util.UtilMessages;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,38 +16,39 @@ public class ProdutoMB implements Serializable{
     private List<Produto> produtos;
     
     public ProdutoMB() {
+        this.produtos = new ArrayList<Produto>();
         this.listar();
     }
     
-    public void listar(){
-        ProdutoService service = new ProdutoService();
-        produtos = service.listar();
+    public ArrayList<Produto> listar(){
+        return (ArrayList<Produto>) produtos;
     }
     
-    public String novo(){
+    public String adicionar(){
         produto = new Produto();
         return "new.xhtml?faces-redirect=true";
     }
     
     public String inserir(){
-        ProdutoService service = new ProdutoService();
-        if (service.inserir(produto)){
-            UtilMessages.messageInfo("Produto cadastrada com sucesso!");
+        if (produtos.add(produto)){
+            UtilMessages.messageInfo("Produto cadastrado com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao cadastrar a produto!");
+            UtilMessages.messageError("Ocorreu um erro ao cadastrar o produto!");
             return null;
         }
     }
     
     public String alterar(){
-        ProdutoService service = new ProdutoService();
-        if (service.alterar(produto)){
-            UtilMessages.messageInfo("Produto alterada com sucesso!");
+        produtos.add(produto.getId(), produto);
+        
+        if (produtos.get(produto.getId()).equals(produto)){
+            UtilMessages.messageInfo("Produto alterado com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true";
         }else{
+            
             UtilMessages.messageError("Ocorreu um erro ao alterar a produto!");
             return null;
         }
@@ -58,14 +59,13 @@ public class ProdutoMB implements Serializable{
         return "alter.xhtml?faces-redirect=true";
     }
     
-    public String excluir(Produto produto){
-        ProdutoService service = new ProdutoService();
-        if (service.excluir(produto)){
-            UtilMessages.messageInfo("Produto excluída com sucesso!");
+    public String excluir(Produto produto){        
+        if (produtos.remove(produto)){
+            UtilMessages.messageInfo("Produto excluído com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true";
         }else{
-            UtilMessages.messageError("Ocorreu um erro ao excluir a produto!");
+            UtilMessages.messageError("Ocorreu um erro ao excluir o produto!");
             return null;
         }
     }
@@ -89,4 +89,5 @@ public class ProdutoMB implements Serializable{
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
+
 }
